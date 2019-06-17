@@ -86,7 +86,11 @@ class WhatIsDiscussion extends Component{
         <ScrollView>
             <CustomHeader 
                     title=""
-                    alignItems = 'center' 
+                    alignItems = 'center'  
+                    type="sub"
+                    sub="dotMenu"
+                    openDotMenu={()=>alert("Clicked")}
+
             />
 
              <View>
@@ -114,6 +118,7 @@ class WhatIsDiscussion extends Component{
                       color="white"
                       size={30}
                     />
+                    <Text>05</Text>
                     </TouchableOpacity>
                 </Right>
                 </Header>

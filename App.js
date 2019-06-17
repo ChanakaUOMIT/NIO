@@ -47,9 +47,9 @@ const AppStackNavigator = createStackNavigator({
   //   screen: Discussion
   // },
 
-  // WhatIsDiscussion:{
-  //   screen:WhatIsDiscussion
-  // },
+  WhatIsDiscussion:{
+    screen:WhatIsDiscussion
+  },
  
   DiscussionParticipantList:{
     screen:DiscussionParticipantList

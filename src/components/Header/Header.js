@@ -33,7 +33,7 @@ class CustomHeader extends Component{
     } 
 
      render(){
-         const { title, openDrawer, iconName,leftPress, type,iconNameRight } = this.props;
+         const { title, sub,openDotMenu, openDrawer, iconName,leftPress, type,iconNameRight } = this.props;
          const rightIcon = type==='sub'? 
             <Icon_Ionicons  name="ios-arrow-back"    
                 
@@ -49,10 +49,16 @@ class CustomHeader extends Component{
                 size={25} color="white"/>
         </Button>
 
-        const leftIcon = type==='third'? 
-        <Icon_Entypo  name="dots-three-vertical"    
+        const leftIcon = sub==='dotMenu'? 
+        <TouchableOpacity
+            onPress={openDotMenu}
+        >
+            <Icon_Entypo  name="dots-three-vertical"    
             
-        size={25} color="white"/> :
+            size={25} color="white"
+            /> 
+        </TouchableOpacity>
+        :
         <Icon                            
             // name="md-notifications"
             onPress={leftPress}
@@ -78,7 +84,7 @@ class CustomHeader extends Component{
                                 name={iconName}
                                 style={{fontSize: 23,  color: '#ffffff'}}  
                             /> */}
-                        
+                        {leftIcon}
                     </Right>
                 </Header>
              </View>
@@ -94,7 +100,9 @@ CustomHeader.propsTypes={
     iconName:PropTypes.string,
     leftPress:PropTypes.func,
     type:PropTypes.string,
-    iconNameRight:PropTypes.string
+    iconNameRight:PropTypes.string,
+    sub:PropTypes.string,
+    openDotMenu:PropTypes.func
 }
 
 
