@@ -24,6 +24,7 @@ import colors from '../../styles/colors';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icon_Ionicons from 'react-native-vector-icons/Ionicons';
 import Icon_Entypo from 'react-native-vector-icons/Entypo';
+import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
 
 // dots-three-vertical
 
@@ -32,8 +33,22 @@ class CustomHeader extends Component{
         super(props);
     } 
 
+    _menu = null;
+ 
+    setMenuRef = ref => {
+      this._menu = ref;
+    };
+   
+    hideMenu = () => {
+      this._menu.hide();
+    };
+   
+    showMenu = () => {
+      this._menu.show();
+    };
+
      render(){
-         const { title, sub,openDotMenu, openDrawer, iconName,leftPress, type,iconNameRight } = this.props;
+         const { title, sub,openDotMenu, dotMenu, openDrawer, iconName,leftPress, type,iconNameRight } = this.props;
          const rightIcon = type==='sub'? 
             <Icon_Ionicons  name="ios-arrow-back"    
                 
@@ -53,10 +68,28 @@ class CustomHeader extends Component{
         <TouchableOpacity
             onPress={openDotMenu}
         >
-            <Icon_Entypo  name="dots-three-vertical"    
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Menu
+          ref={this.setMenuRef}
+          button={ 
+          <Icon_Entypo  name="dots-three-vertical"    
+            onPress={this.showMenu}
+          size={25} color="white"
+          /> }
+        >
+          <MenuItem onPress={this.hideMenu}>Menu item 1</MenuItem>
+          <MenuItem onPress={this.hideMenu}>Menu item 2</MenuItem>
+          <MenuItem onPress={this.hideMenu} disabled>
+            Menu item 3
+          </MenuItem>
+          <MenuDivider />
+          <MenuItem onPress={this.hideMenu}>Menu item 4</MenuItem>
+        </Menu>
+      </View>
+            {/* <Icon_Entypo  name="dots-three-vertical"    
             
             size={25} color="white"
-            /> 
+            />  */}
         </TouchableOpacity>
         :
         <Icon                            

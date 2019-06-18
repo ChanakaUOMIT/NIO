@@ -1,50 +1,41 @@
-import React, { Component } from "react";
- import { Platform, StyleSheet, View, Image, TouchableOpacity, Alert, Text } from "react-native";
-
- export default class Test extends Component {
-
-   FloatingButtonEvent=()=>{
-       Alert.alert("Floating Button Clicked");
-   }
-
-   render() {
-      return (
-        <View style={styles.container}>
-        <Text style={styles.headerText}> Floating Button Example </Text>
-         <TouchableOpacity activeOpacity={0.5} onPress={this.FloatingButtonEvent} style={styles.TouchableOpacityStyle} >
-           <Image source={require('../task/contact.jpg')}  style={styles.FloatingButtonStyle} />
-         </TouchableOpacity>
-       </View>
-     );
-   }
- }
-
-
- const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: "#e5e5e5"
-  },
-  headerText: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-    fontWeight: 'bold'
-  },
-  TouchableOpacityStyle: {
-    position: 'absolute',
-    width: 50,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    right: 30,
-    bottom: 30,
-  },
-  FloatingButtonStyle: {
-    resizeMode: 'contain',
-    width: 50,
-    height: 50,
-  },
-
-});
+import React from 'react';
+ 
+import { View, Text } from 'react-native';
+import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
+ 
+class App extends React.PureComponent {
+  _menu = null;
+ 
+  setMenuRef = ref => {
+    this._menu = ref;
+  };
+ 
+  hideMenu = () => {
+    this._menu.hide();
+  };
+ 
+  showMenu = () => {
+    this._menu.show();
+  };
+ 
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Menu
+          ref={this.setMenuRef}
+          button={<Text onPress={this.showMenu}>Show menu</Text>}
+        >
+          <MenuItem onPress={this.hideMenu}>Menu item 1</MenuItem>
+          <MenuItem onPress={this.hideMenu}>Menu item 2</MenuItem>
+          <MenuItem onPress={this.hideMenu} disabled>
+            Menu item 3
+          </MenuItem>
+          <MenuDivider />
+          <MenuItem onPress={this.hideMenu}>Menu item 4</MenuItem>
+        </Menu>
+      </View> 
+    );
+  }
+}
+ 
+export default App;

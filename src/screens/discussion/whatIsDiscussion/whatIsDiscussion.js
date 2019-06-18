@@ -7,6 +7,9 @@ import DiscussedCard from './discussedCard';
 import Icon_Ionicons from 'react-native-vector-icons/Ionicons';
 import Icon_Material from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon_MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
+import CustomMenuIcon from '../../../components/customMenu/CustomMenuIcon';
+import CustomMenu from '../../../components/customMenu/CustomMenu';
 
 data= [{
     id: 1,
@@ -77,19 +80,128 @@ class WhatIsDiscussion extends Component{
     constructor(){
         super();
         this.state = { text: '' };
-        } 
+        }
+        
+        // _menu = null;
+ 
+        // setMenuRef = ref => {
+        //   this._menu = ref;
+        // };
+       
+        // hideMenu = () => {
+        //   this._menu.hide();
+        // };
+       
+        // showMenu = () => {
+        //   this._menu.show();
+        // }; 
+
+        //Navigation option to create menu in header
+  static navigationOptions = ({ navigation }) => {
+    return {
+      //Heading/title of the header
+      title: navigation.getParam('Title', 'Popup Menu Example'),
+      //Heading style
+      headerStyle: {
+        backgroundColor: navigation.getParam('BackgroundColor', 'red'),
+      },
+      //Heading text color
+      headerTintColor: navigation.getParam('HeaderTintColor', '#fff'),
+      //Heading Menu in Right Side
+      headerRight: (
+        //Custom menu component
+        <CustomMenuIcon
+          //Menu Text
+          menutext="Menu"
+          //Menu View Style
+          menustyle={{
+            marginRight: 16,
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+          }}
+          //Menu Text Style
+          textStyle={{
+            color: 'white',
+          }}
+          //Click functions for the menu items
+          option1Click={() => {
+            navigation.navigate('SecondPage');
+          }}
+          option2Click={() => {}}
+          option3Click={() => {}}
+          option4Click={() => {
+            alert('Option 4');
+          }}
+        />
+      ),
+    };
+  };
 
         
+        genarateDotMenu(){
+         return(
+          <CustomMenuIcon
+          //Menu Text
+          menutext="Menu"
+          //Menu View Style
+          menustyle={{
+            marginRight: 16,
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+          }}
+          //Menu Text Style
+          textStyle={{
+            color: 'white',
+          }}
+          //Click functions for the menu items
+          option1Click={() => {
+            navigation.navigate('SecondPage');
+          }}
+          option2Click={() => {}}
+          option3Click={() => {}}
+          option4Click={() => {
+            alert('Option 4');
+          }}
+        />
+         )
+        }
     
       render() {
-        return ( <View>
+        const { navigate } = this.props.navigation;
+        return ( 
+        <View>
         <ScrollView>
             <CustomHeader 
                     title=""
                     alignItems = 'center'  
                     type="sub"
-                    sub="dotMenu"
-                    openDotMenu={()=>alert("Clicked")}
+                    sub="dotMenu" 
+                    openDotMenu={()=>this.genarateDotMenu()}
+                    // dotMenu={
+                    // <CustomMenuIcon
+                    //   //Menu Text
+                    //   menutext="Menu"
+                    //   //Menu View Style
+                    //   menustyle={{
+                    //     marginRight: 16,
+                    //     flexDirection: 'row',
+                    //     justifyContent: 'flex-end',
+                    //   }}
+                    //   //Menu Text Style
+                    //   textStyle={{
+                    //     color: 'white',
+                    //   }}
+                    //   //Click functions for the menu items
+                    //   option1Click={() => {
+                    //     navigation.navigate('SecondPage');
+                    //   }}
+                    //   option2Click={() => {}}
+                    //   option3Click={() => {}}
+                    //   option4Click={() => {
+                    //     alert('Option 4');
+                    //   }}
+                    // />
+                  // }
 
             />
 
@@ -195,7 +307,9 @@ class WhatIsDiscussion extends Component{
               </View>
           </View>
         </View>
-        </View> )} 
+        </View> 
+        
+        )} 
         
 }
 
